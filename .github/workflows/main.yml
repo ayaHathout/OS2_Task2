@@ -9,5 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: "Login to Docker hub"
         run: docker login --username ${{secrets.USERNAME}} --password ${{secrets.TOKEN}}
+
+      - name: "Building Docker image"
+        run: docker build -t ${{secrets.USERNAME}}/myImage
+
+      - name: "Pushing image to Docker hub"
+        run: docker push ${{secrets.USERNAME}}/myImage
